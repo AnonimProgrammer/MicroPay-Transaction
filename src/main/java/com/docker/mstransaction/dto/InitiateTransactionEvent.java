@@ -2,6 +2,7 @@ package com.docker.mstransaction.dto;
 
 import com.docker.mstransaction.model.EndpointType;
 import com.docker.mstransaction.model.TransactionType;
+
 import java.math.BigDecimal;
 
 public class InitiateTransactionEvent {
@@ -15,16 +16,67 @@ public class InitiateTransactionEvent {
     private TransactionType type;
 
     public InitiateTransactionEvent() {}
-    public InitiateTransactionEvent(Long paymentId, BigDecimal amount, String source, EndpointType sourceType, String destination, EndpointType destinationType, TransactionType type) {
-        this.paymentId = paymentId;
-        this.amount = amount;
-        this.source = source;
-        this.sourceType = sourceType;
-        this.destination = destination;
-        this.destinationType = destinationType;
-        this.type = type;
+
+    private InitiateTransactionEvent(Builder builder) {
+        this.paymentId = builder.paymentId;
+        this.amount = builder.amount;
+        this.source = builder.source;
+        this.sourceType = builder.sourceType;
+        this.destination = builder.destination;
+        this.destinationType = builder.destinationType;
+        this.type = builder.type;
     }
 
+    public static class Builder {
+        private Long paymentId;
+        private BigDecimal amount;
+        private String source;
+        private EndpointType sourceType;
+        private String destination;
+        private EndpointType destinationType;
+        private TransactionType type;
+
+        public Builder paymentId(Long paymentId) {
+            this.paymentId = paymentId;
+            return this;
+        }
+
+        public Builder amount(BigDecimal amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder source(String source) {
+            this.source = source;
+            return this;
+        }
+
+        public Builder sourceType(EndpointType sourceType) {
+            this.sourceType = sourceType;
+            return this;
+        }
+
+        public Builder destination(String destination) {
+            this.destination = destination;
+            return this;
+        }
+
+        public Builder destinationType(EndpointType destinationType) {
+            this.destinationType = destinationType;
+            return this;
+        }
+
+        public Builder type(TransactionType type) {
+            this.type = type;
+            return this;
+        }
+
+        public InitiateTransactionEvent build() {
+            return new InitiateTransactionEvent(this);
+        }
+    }
+
+    // Getters and setters
     public Long getPaymentId() {
         return paymentId;
     }
@@ -33,36 +85,12 @@ public class InitiateTransactionEvent {
         this.paymentId = paymentId;
     }
 
-    public TransactionType getType() {
-        return type;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setType(TransactionType type) {
-        this.type = type;
-    }
-
-    public EndpointType getDestinationType() {
-        return destinationType;
-    }
-
-    public void setDestinationType(EndpointType destinationType) {
-        this.destinationType = destinationType;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public EndpointType getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(EndpointType sourceType) {
-        this.sourceType = sourceType;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getSource() {
@@ -73,12 +101,36 @@ public class InitiateTransactionEvent {
         this.source = source;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public EndpointType getSourceType() {
+        return sourceType;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setSourceType(EndpointType sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public EndpointType getDestinationType() {
+        return destinationType;
+    }
+
+    public void setDestinationType(EndpointType destinationType) {
+        this.destinationType = destinationType;
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 
     @Override
